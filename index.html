@@ -216,7 +216,6 @@
                 { name: 'Deadlift', category: 'Powerlifting', equipment: 'Barbell', variations: ['Conventional', 'Sumo', 'Deficit', 'Block Pulls', 'Paused'], notes: 'Full body strength developer' },
                 
                 // POWERLIFTING - Squat Variations
-                { name: 'Front Squat', category: 'Powerlifting', equipment: 'Barbell', variations: ['Olympic Style', 'Cross Arm', 'Pause', 'Tempo'], notes: 'Quad and core emphasis' },
                 { name: 'Safety Squat Bar Squat', category: 'Powerlifting', equipment: 'SSB', variations: ['High Bar Position', 'Low', 'Box Squat'], notes: 'Upper back development' },
                 { name: 'Box Squat', category: 'Powerlifting', equipment: 'Barbell', variations: ['Wide Stance', 'Narrow Stance', 'Pause on Box'], notes: 'Hip and posterior chain focus' },
                 { name: 'Bulgarian Split Squat', category: 'Powerlifting', equipment: 'Barbell/Dumbbells', variations: ['Barbell', 'Dumbbell', 'Goblet Style'], notes: 'Single leg strength and balance' },
@@ -229,10 +228,8 @@
                 { name: 'Spoto Press', category: 'Powerlifting', equipment: 'Barbell', variations: ['1 inch pause', '2 inch pause'], notes: 'Pause just above chest' },
                 
                 // POWERLIFTING - Deadlift Variations
-                { name: 'Romanian Deadlift', category: 'Powerlifting', equipment: 'Barbell', variations: ['Stiff Leg', 'Single Leg', 'Deficit'], notes: 'Hamstring and lower back' },
                 { name: 'Sumo Deadlift', category: 'Powerlifting', equipment: 'Barbell', variations: ['Wide Stance', 'Semi-Sumo', 'Deficit'], notes: 'Hip-dominant pulling' },
                 { name: 'Trap Bar Deadlift', category: 'Powerlifting', equipment: 'Trap Bar', variations: ['High Handles', 'Low Handles'], notes: 'Safer for some lifters' },
-                { name: 'Good Morning', category: 'Powerlifting', equipment: 'Barbell/SSB', variations: ['Bent Over', 'Seated', 'Banded'], notes: 'Posterior chain strengthening' },
                 
                 // CHEST - Barbell
                 { name: 'Flat Barbell Bench Press', category: 'Chest', equipment: 'Barbell', variations: ['Wide Grip', 'Medium Grip', 'Close Grip', 'Pause'], notes: 'Classic chest builder' },
@@ -242,7 +239,6 @@
                 // CHEST - Dumbbell
                 { name: 'Dumbbell Bench Press', category: 'Chest', equipment: 'Dumbbells', variations: ['Flat', 'Incline', 'Decline', 'Neutral Grip'], notes: 'Greater ROM than barbell' },
                 { name: 'Dumbbell Fly', category: 'Chest', equipment: 'Dumbbells', variations: ['Flat', 'Incline', 'Decline'], notes: 'Chest stretch and isolation' },
-                { name: 'Dumbbell Pullover', category: 'Chest', equipment: 'Dumbbell', variations: ['Across Bench', 'Lengthwise'], notes: 'Chest and lat involvement' },
                 
                 // CHEST - Cables/Machines
                 { name: 'Cable Fly', category: 'Chest', equipment: 'Cable Machine', variations: ['High to Low', 'Low to High', 'Mid Level'], notes: 'Constant tension on pecs' },
@@ -1065,7 +1061,7 @@
                                             <button
                                                 key={cat}
                                                 onClick={() => setSelectedCategory(cat)}
-                                                className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap text-sm ${
+                                                className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap text-sm flex-shrink-0 ${
                                                     selectedCategory === cat
                                                         ? 'bg-orange-600 text-white'
                                                         : 'bg-slate-800 text-slate-400'
@@ -1242,7 +1238,7 @@
                                                 <button
                                                     key={cat}
                                                     onClick={() => setSelectedCategory(cat)}
-                                                    className={`px-3 py-2 rounded-lg font-medium whitespace-nowrap text-xs ${
+                                                    className={`px-3 py-2 rounded-lg font-medium whitespace-nowrap text-xs flex-shrink-0 ${
                                                         selectedCategory === cat
                                                             ? 'bg-orange-600 text-white'
                                                             : 'bg-slate-700 text-slate-400'
