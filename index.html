@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ea580c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Strongman">
+    <meta name="description" content="Track your strongman training blocks, sessions, and exercises">
+    <title>Strongman Training</title>
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlN0cm9uZ21hbiBUcmFpbmluZyIsCiAgInNob3J0X25hbWUiOiAiU3Ryb25nbWFuIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwZjE3MmEiLAogICJ0aGVtZV9jb2xvciI6ICIjZWE1ODBjIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxOTInIGhlaWdodD0nMTkyJyB2aWV3Qm94PScwIDAgMjQgMjQnIGZpbGw9J25vbmUnIHN0cm9rZT0nJTIzZWE1ODBjJyBzdHJva2Utd2lkdGg9JzInJTNFJTNDY2lyY2xlIGN4PScxMicgY3k9JzUnIHI9JzMnLyUzRSUzQ3BhdGggZD0nTTYuNSA4YTIgMiAwIDAgMC0xLjkwNSAxLjQ2TDIuMSAxOC41QTIgMiAwIDAgMCA0IDIxaDE2YTIgMiAwIDAgMCAxLjkyNS0yLjU0TDE5LjQgOS41QTIgMiAwIDAgMCAxNy40OCA4WicvJTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MTInIGhlaWdodD0nNTEyJyB2aWV3Qm94PScwIDAgMjQgMjQnIGZpbGw9J25vbmUnIHN0cm9rZT0nJTIzZWE1ODBjJyBzdHJva2Utd2lkdGg9JzInJTNFJTNDY2lyY2xlIGN4PScxMicgY3k9JzUnIHI9JzMnLyUzRSUzQ3BhdGggZD0nTTYuNSA4YTIgMiAwIDAgMC0xLjkwNSAxLjQ2TDIuMSAxOC41QTIgMiAwIDAgMCA0IDIxaDE2YTIgMiAwIDAgMCAxLjkyNS0yLjU0TDE5LjQgOS41QTIgMiAwIDAgMCAxNy40OCA4WicvJTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overscroll-behavior: none;
+        }
+
+        /* Improve touch targets */
+        button {
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        input, textarea, select {
+            font-size: 16px !important; /* Prevents zoom on iOS */
+        }
+
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        /* Loading animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Safe area for notched devices */
+        .safe-area-inset {
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Lucide React icons as inline SVG components
+        const Dumbbell = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M14.4 14.4 9.6 9.6"/>
+                <path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/>
+                <path d="m21.5 21.5-1.4-1.4"/>
+                <path d="M3.9 3.9 2.5 2.5"/>
+                <path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z"/>
+            </svg>
+        );
+
+        const Plus = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M5 12h14"/><path d="M12 5v14"/>
+            </svg>
+        );
+
+        const Trash2 = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/>
+            </svg>
+        );
+
+        const Calendar = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
+            </svg>
+        );
+
+        const TrendingUp = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+            </svg>
+        );
+
+        const Edit2 = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/>
+            </svg>
+        );
+
+        const Save = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+            </svg>
+        );
+
+        const X = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+            </svg>
+        );
+
+        const Weight = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <circle cx="12" cy="5" r="3"/><path d="M6.5 8a2 2 0 0 0-1.905 1.46L2.1 18.5A2 2 0 0 0 4 21h16a2 2 0 0 0 1.925-2.54L19.4 9.5A2 2 0 0 0 17.48 8Z"/>
+            </svg>
+        );
+
+        const ChevronDown = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="m6 9 6 6 6-6"/>
+            </svg>
+        );
+
+        const ChevronUp = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="m18 15-6-6-6 6"/>
+            </svg>
+        );
+
+        const ArrowLeft = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+            </svg>
+        );
+
+        const Search = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+        );
+
+        function StrongmanTrainingApp() {
+            const [activeTab, setActiveTab] = useState('blocks');
+            const [trainingBlocks, setTrainingBlocks] = useState([]);
+            const [currentBlock, setCurrentBlock] = useState(null);
+            const [currentSession, setCurrentSession] = useState(null);
+            const [showExerciseModal, setShowExerciseModal] = useState(false);
+            const [searchTerm, setSearchTerm] = useState('');
+            const [selectedCategory, setSelectedCategory] = useState('All');
+            const [expandedExercises, setExpandedExercises] = useState({});
+
+            // Comprehensive strongman exercise library
+            const [exerciseLibrary] = useState([
+                // Pressing Events
+                { name: 'Log Press', category: 'Pressing', equipment: 'Log', variations: ['Strict', 'Push Press', 'Split Jerk', 'Continental Clean'], notes: 'Max effort or reps in 60-75 seconds' },
+                { name: 'Axle Press', category: 'Pressing', equipment: 'Axle', variations: ['Strict', 'Push Press', 'Continental Clean & Press'], notes: 'Thick bar challenges grip' },
+                { name: 'Circus Dumbbell', category: 'Pressing', equipment: 'Circus DB', variations: ['Single Arm', 'Alternating', 'Max Reps'], notes: 'Often 100-150+ lbs' },
+                { name: 'Viking Press', category: 'Pressing', equipment: 'Viking Press', variations: ['Seated', 'Standing', 'Single Arm'], notes: 'Neutral grip pressing' },
+                { name: 'Apollon Axle', category: 'Pressing', equipment: 'Apollon Axle', variations: ['Clean & Press', 'Continental'], notes: 'Extra thick 3" axle' },
+                
+                // Deadlift Events
+                { name: 'Deadlift (Standard)', category: 'Deadlift', equipment: 'Barbell', variations: ['Conventional', 'Sumo', 'Deficit', 'Block Pulls'], notes: 'Competition max or reps' },
+                { name: 'Elephant Bar Deadlift', category: 'Deadlift', equipment: 'Elephant Bar', variations: ['Max Single', 'Rep Max'], notes: 'Long, flexible bar' },
+                { name: 'Tire Deadlift', category: 'Deadlift', equipment: 'Tire Frame', variations: ['18" Height', 'Standard Height'], notes: 'Frame deadlift with tires' },
+                { name: 'Car Deadlift', category: 'Deadlift', equipment: 'Car Deadlift Frame', variations: ['Max Reps in 60s', 'Max Height Hold'], notes: 'Typically 18" handles' },
+                { name: 'Silver Dollar Deadlift', category: 'Deadlift', equipment: 'Silver Dollar Bar', variations: ['13" Height', 'Standard'], notes: 'Thick handled frame' },
+                { name: 'Hummer Tire Deadlift', category: 'Deadlift', equipment: 'Hummer Tire Frame', variations: ['Max Reps', 'Time Hold'], notes: 'Popular competition event' },
+                
+                // Carrying Events
+                { name: "Farmer's Walk", category: 'Carrying', equipment: "Farmer's Handles", variations: ['Max Distance', 'Timed', 'Max Weight'], notes: 'Classic strongman event' },
+                { name: 'Yoke Walk', category: 'Carrying', equipment: 'Yoke', variations: ['Heavy', 'Speed', 'Ascending Weight'], notes: 'Back loaded carry' },
+                { name: 'Frame Carry', category: 'Carrying', equipment: 'Frame', variations: ['Heavy', 'Speed', 'Distance'], notes: 'Similar to farmer but single implement' },
+                { name: 'Super Yoke', category: 'Carrying', equipment: 'Super Yoke', variations: ['Max Distance', 'Time Trial'], notes: 'Extra heavy yoke variant' },
+                { name: 'Duck Walk', category: 'Carrying', equipment: 'Duck Walk Handles', variations: ['Goblet Style', 'Low Handles'], notes: 'Wide stance carry' },
+                { name: 'Sandbag Carry', category: 'Carrying', equipment: 'Sandbag', variations: ['Bear Hug', 'Shoulder', 'Zercher'], notes: 'Awkward object carry' },
+                { name: 'Keg Carry', category: 'Carrying', equipment: 'Keg', variations: ['Bear Hug', 'Shoulder', 'Multiple Kegs'], notes: 'Shifting weight' },
+                
+                // Loading Events
+                { name: 'Atlas Stones', category: 'Loading', equipment: 'Atlas Stones', variations: ['Ascending Weight', 'Single Rep Max', 'Time Challenge'], notes: 'Load to platforms 48"-54"' },
+                { name: 'Sandbag Load', category: 'Loading', equipment: 'Sandbag', variations: ['Over Bar', 'To Platform', 'Multiple Bags'], notes: '200-400 lbs typically' },
+                { name: 'Keg Toss', category: 'Loading', equipment: 'Keg', variations: ['Over Bar', 'Max Height'], notes: 'Explosive loading' },
+                { name: 'Barrel Load', category: 'Loading', equipment: 'Barrel', variations: ['To Platform', 'Distance Series'], notes: 'Similar to keg' },
+                { name: 'Natural Stone Load', category: 'Loading', equipment: 'Natural Stone', variations: ['Various Heights', 'Max Single'], notes: 'Irregular shape' },
+                
+                // Pulling Events
+                { name: 'Truck Pull', category: 'Pulling', equipment: 'Truck/Harness', variations: ['Speed', 'Distance', 'Heavy'], notes: '25-75 feet typical' },
+                { name: 'Plane Pull', category: 'Pulling', equipment: 'Plane/Harness', variations: ['Team', 'Solo', 'Speed'], notes: 'Ultimate pulling event' },
+                { name: 'Bus Pull', category: 'Pulling', equipment: 'Bus/Harness', variations: ['Distance', 'Time Trial'], notes: 'Heavy pulling' },
+                { name: 'Sled Drag', category: 'Pulling', equipment: 'Sled/Harness', variations: ['Backward', 'Forward', 'Heavy'], notes: 'Conditioning and strength' },
+                { name: 'Arm Over Arm', category: 'Pulling', equipment: 'Rope/Sled', variations: ['Seated', 'Standing', 'Truck Pull Style'], notes: 'Hand over hand pulling' },
+                
+                // Grip Events
+                { name: 'Hercules Hold', category: 'Grip/Hold', equipment: 'Hercules Hold', variations: ['Max Time', 'Increasing Weight'], notes: 'Pillar hold apart' },
+                { name: 'Fingal Fingers', category: 'Grip/Hold', equipment: 'Fingal Fingers', variations: ['5 Fingers', '3 Fingers', 'Time Trial'], notes: 'Flip large poles' },
+                { name: 'Timber Carry', category: 'Grip/Hold', equipment: 'Log/Timber', variations: ['Max Distance', 'Max Time'], notes: 'Front carry with thick log' },
+                { name: 'Husafell Stone', category: 'Grip/Hold', equipment: 'Husafell Stone', variations: ['Max Distance', 'Time Hold'], notes: 'Flat stone carry' },
+                { name: 'Anvil Hold', category: 'Grip/Hold', equipment: 'Anvil', variations: ['Horn Hold', 'Time Challenge'], notes: 'Awkward grip hold' },
+                
+                // Static Strength
+                { name: 'Conan Wheel', category: 'Static Strength', equipment: "Conan's Wheel", variations: ['Max Reps', 'Time Trial', 'Weight Progression'], notes: 'Circular walking hold' },
+                { name: 'Chain Hold', category: 'Static Strength', equipment: 'Chains', variations: ['Overhead', 'Front Hold'], notes: 'Hold heavy chains' },
+                { name: 'Crucifix Hold', category: 'Static Strength', equipment: 'Weights/Apparatus', variations: ['Max Time', 'Weight Challenge'], notes: 'Arms extended laterally' },
+                
+                // Throwing Events
+                { name: 'Weight Over Bar', category: 'Throwing', equipment: 'Weight (56lb/25kg)', variations: ['Max Height', 'Distance'], notes: 'Highland games style' },
+                { name: 'Keg Toss (Height)', category: 'Throwing', equipment: 'Keg', variations: ['Max Height', 'Multiple Attempts'], notes: 'Throw for height' },
+                
+                // Accessory/Support Work
+                { name: 'Axle Deadlift', category: 'Accessory', equipment: 'Axle', variations: ['Conventional', 'Deficit', 'High Pulls'], notes: 'Grip and pull strength' },
+                { name: 'Log Clean', category: 'Accessory', equipment: 'Log', variations: ['Continental', 'Strict Clean', 'Lap to Chest'], notes: 'Practice log technique' },
+                { name: 'Stone Simulator', category: 'Accessory', equipment: 'Sandbag/Simulator', variations: ['Floor to Lap', 'Lap to Chest', 'Full Extension'], notes: 'Atlas stone practice' },
+                { name: 'Front Squat', category: 'Accessory', equipment: 'Barbell/SSB', variations: ['High Bar', 'SSB', 'Pause'], notes: 'Leg and core strength' },
+                { name: 'Safety Squat Bar Squat', category: 'Accessory', equipment: 'SSB', variations: ['High Bar Position', 'Low', 'Box Squat'], notes: 'Upper back development' },
+                { name: 'Belt Squat', category: 'Accessory', equipment: 'Belt Squat Machine', variations: ['High Reps', 'Heavy', 'Paused'], notes: 'Leg volume without back stress' },
+                { name: 'Overhead Squat', category: 'Accessory', equipment: 'Barbell/Log', variations: ['Behind Neck', 'Log', 'Snatch Grip'], notes: 'Mobility and stability' },
+                { name: 'Good Morning', category: 'Accessory', equipment: 'Barbell/SSB', variations: ['Bent Over', 'Seated', 'Banded'], notes: 'Posterior chain' },
+                { name: 'Romanian Deadlift', category: 'Accessory', equipment: 'Barbell/Axle', variations: ['Stiff Leg', 'Single Leg', 'Deficit'], notes: 'Hamstring and back' },
+                { name: 'Block Pulls', category: 'Accessory', equipment: 'Barbell', variations: ['Mid Shin', 'Knee Height', 'Heavy Singles'], notes: 'Lockout strength' },
+                { name: 'Zercher Squat', category: 'Accessory', equipment: 'Barbell/Axle', variations: ['Box', 'Pause', 'Anderson'], notes: 'Core and upper back' },
+                { name: 'Stone to Shoulder', category: 'Accessory', equipment: 'Atlas Stone', variations: ['Alternating', 'Single Shoulder', 'Multiple Reps'], notes: 'Stone conditioning' },
+                { name: 'Yoke Squat', category: 'Accessory', equipment: 'Yoke', variations: ['Walk Out Squat', 'Static Hold Squat'], notes: 'Combines carry and squat' },
+                { name: 'Pin Press', category: 'Accessory', equipment: 'Barbell/Log', variations: ['Various Heights', 'Pause', 'Lockout Focus'], notes: 'Pressing strength' },
+                { name: 'Floor Press', category: 'Accessory', equipment: 'Barbell/Axle/Log', variations: ['Close Grip', 'Wide Grip', 'Feet Up'], notes: 'Lockout and triceps' },
+                { name: 'Incline Press', category: 'Accessory', equipment: 'Barbell/Axle', variations: ['Various Angles', 'Close Grip'], notes: 'Upper chest and shoulders' },
+                { name: 'Dips', category: 'Accessory', equipment: 'Dip Station', variations: ['Weighted', 'Bodyweight', 'Chest Focus'], notes: 'Pressing assistance' },
+                { name: 'Pull-ups/Chin-ups', category: 'Accessory', equipment: 'Pull-up Bar', variations: ['Weighted', 'Neutral Grip', 'Wide Grip'], notes: 'Back and arm strength' },
+                { name: 'Rows (Barbell/T-Bar)', category: 'Accessory', equipment: 'Barbell/T-Bar', variations: ['Pendlay', 'Yates', 'Seal Row'], notes: 'Back thickness' },
+                { name: 'Shrugs', category: 'Accessory', equipment: 'Barbell/Trap Bar/Dumbbells', variations: ['Heavy', 'High Rep', 'Behind Back'], notes: 'Trap development' },
+                { name: 'Farmer Walk (Short)', category: 'Accessory', equipment: "Farmer's Handles", variations: ['Heavy', 'Speed', 'Multiple Trips'], notes: 'Grip and core' },
+            ]);
+
+            const categories = ['All', 'Pressing', 'Deadlift', 'Carrying', 'Loading', 'Pulling', 'Grip/Hold', 'Static Strength', 'Throwing', 'Accessory'];
+
+            // Load data from localStorage
+            useEffect(() => {
+                try {
+                    const saved = localStorage.getItem('strongman-blocks');
+                    if (saved) {
+                        setTrainingBlocks(JSON.parse(saved));
+                    }
+                } catch (error) {
+                    console.log('No previous training blocks found');
+                }
+            }, []);
+
+            // Save data to localStorage
+            const saveData = (blocks) => {
+                try {
+                    localStorage.setItem('strongman-blocks', JSON.stringify(blocks));
+                } catch (error) {
+                    console.error('Failed to save data:', error);
+                }
+            };
+
+            // Training Block Management
+            const createNewBlock = () => {
+                const newBlock = {
+                    id: Date.now(),
+                    name: `Training Block ${trainingBlocks.length + 1}`,
+                    startDate: new Date().toISOString(),
+                    endDate: null,
+                    phase: 'Hypertrophy',
+                    sessions: [],
+                    active: true,
+                    notes: ''
+                };
+                setCurrentBlock(newBlock);
+            };
+
+            const saveBlock = () => {
+                if (!currentBlock) return;
+                
+                const existingIndex = trainingBlocks.findIndex(b => b.id === currentBlock.id);
+                let updatedBlocks;
+                
+                if (existingIndex >= 0) {
+                    updatedBlocks = [...trainingBlocks];
+                    updatedBlocks[existingIndex] = currentBlock;
+                } else {
+                    updatedBlocks = [currentBlock, ...trainingBlocks];
+                }
+                
+                setTrainingBlocks(updatedBlocks);
+                saveData(updatedBlocks);
+                setCurrentBlock(null);
+            };
+
+            const deleteBlock = (blockId) => {
+                if (!confirm('Delete this training block?')) return;
+                const updatedBlocks = trainingBlocks.filter(b => b.id !== blockId);
+                setTrainingBlocks(updatedBlocks);
+                saveData(updatedBlocks);
+            };
+
+            const editBlock = (block) => {
+                setCurrentBlock({ ...block });
+            };
+
+            // Session Management
+            const createSession = (blockId) => {
+                const block = trainingBlocks.find(b => b.id === blockId);
+                if (!block) return;
+
+                const newSession = {
+                    id: Date.now(),
+                    blockId: blockId,
+                    name: `Session ${block.sessions.length + 1}`,
+                    date: new Date().toISOString(),
+                    exercises: [],
+                    completed: false,
+                    duration: 0,
+                    notes: ''
+                };
+
+                setCurrentSession(newSession);
+            };
+
+            const saveSession = () => {
+                if (!currentSession) return;
+
+                const blockIndex = trainingBlocks.findIndex(b => b.id === currentSession.blockId);
+                if (blockIndex < 0) return;
+
+                const updatedBlocks = [...trainingBlocks];
+                const block = { ...updatedBlocks[blockIndex] };
+                
+                const sessionIndex = block.sessions.findIndex(s => s.id === currentSession.id);
+                if (sessionIndex >= 0) {
+                    block.sessions[sessionIndex] = currentSession;
+                } else {
+                    block.sessions = [currentSession, ...block.sessions];
+                }
+                
+                updatedBlocks[blockIndex] = block;
+                setTrainingBlocks(updatedBlocks);
+                saveData(updatedBlocks);
+                setCurrentSession(null);
+            };
+
+            const deleteSession = (blockId, sessionId) => {
+                if (!confirm('Delete this session?')) return;
+                const blockIndex = trainingBlocks.findIndex(b => b.id === blockId);
+                if (blockIndex < 0) return;
+
+                const updatedBlocks = [...trainingBlocks];
+                const block = { ...updatedBlocks[blockIndex] };
+                block.sessions = block.sessions.filter(s => s.id !== sessionId);
+                updatedBlocks[blockIndex] = block;
+                
+                setTrainingBlocks(updatedBlocks);
+                saveData(updatedBlocks);
+            };
+
+            const editSession = (blockId, session) => {
+                setCurrentSession({ ...session, blockId });
+            };
+
+            const completeSession = (blockId, sessionId) => {
+                const blockIndex = trainingBlocks.findIndex(b => b.id === blockId);
+                if (blockIndex < 0) return;
+
+                const updatedBlocks = [...trainingBlocks];
+                const block = { ...updatedBlocks[blockIndex] };
+                const sessionIndex = block.sessions.findIndex(s => s.id === sessionId);
+                
+                if (sessionIndex >= 0) {
+                    block.sessions[sessionIndex].completed = true;
+                    updatedBlocks[blockIndex] = block;
+                    setTrainingBlocks(updatedBlocks);
+                    saveData(updatedBlocks);
+                }
+            };
+
+            // Exercise Management in Session
+            const addExerciseToSession = (exercise) => {
+                if (!currentSession) return;
+
+                const newExercise = {
+                    id: Date.now(),
+                    name: exercise.name,
+                    category: exercise.category,
+                    equipment: exercise.equipment,
+                    variations: exercise.variations,
+                    notes: exercise.notes,
+                    sets: []
+                };
+
+                setCurrentSession({
+                    ...currentSession,
+                    exercises: [...currentSession.exercises, newExercise]
+                });
+                setShowExerciseModal(false);
+                setSearchTerm('');
+            };
+
+            const removeExerciseFromSession = (exerciseId) => {
+                if (!currentSession) return;
+                if (!confirm('Remove this exercise?')) return;
+
+                setCurrentSession({
+                    ...currentSession,
+                    exercises: currentSession.exercises.filter(e => e.id !== exerciseId)
+                });
+            };
+
+            const addSetToExercise = (exerciseId) => {
+                if (!currentSession) return;
+
+                setCurrentSession({
+                    ...currentSession,
+                    exercises: currentSession.exercises.map(ex =>
+                        ex.id === exerciseId
+                            ? {
+                                ...ex,
+                                sets: [
+                                    ...ex.sets,
+                                    { id: Date.now(), weight: '', reps: '', duration: '', completed: false, notes: '' }
+                                ]
+                            }
+                            : ex
+                    )
+                });
+            };
+
+            const updateSet = (exerciseId, setId, field, value) => {
+                if (!currentSession) return;
+
+                setCurrentSession({
+                    ...currentSession,
+                    exercises: currentSession.exercises.map(ex =>
+                        ex.id === exerciseId
+                            ? {
+                                ...ex,
+                                sets: ex.sets.map(set =>
+                                    set.id === setId ? { ...set, [field]: value } : set
+                                )
+                            }
+                            : ex
+                    )
+                });
+            };
+
+            const toggleSetComplete = (exerciseId, setId) => {
+                if (!currentSession) return;
+
+                setCurrentSession({
+                    ...currentSession,
+                    exercises: currentSession.exercises.map(ex =>
+                        ex.id === exerciseId
+                            ? {
+                                ...ex,
+                                sets: ex.sets.map(set =>
+                                    set.id === setId ? { ...set, completed: !set.completed } : set
+                                )
+                            }
+                            : ex
+                    )
+                });
+            };
+
+            const deleteSet = (exerciseId, setId) => {
+                if (!currentSession) return;
+
+                setCurrentSession({
+                    ...currentSession,
+                    exercises: currentSession.exercises.map(ex =>
+                        ex.id === exerciseId
+                            ? { ...ex, sets: ex.sets.filter(set => set.id !== setId) }
+                            : ex
+                    )
+                });
+            };
+
+            const toggleExerciseExpand = (exerciseId) => {
+                setExpandedExercises(prev => ({
+                    ...prev,
+                    [exerciseId]: !prev[exerciseId]
+                }));
+            };
+
+            // Filtered exercises for modal
+            const filteredExercises = exerciseLibrary.filter(ex => {
+                const matchesSearch = ex.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                    ex.equipment.toLowerCase().includes(searchTerm.toLowerCase());
+                const matchesCategory = selectedCategory === 'All' || ex.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            const formatDate = (dateString) => {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 safe-area-inset">
+                    <div className="max-w-4xl mx-auto">
+                        {/* Header - Fixed */}
+                        <div className="sticky top-0 bg-gradient-to-b from-slate-900 to-slate-900/95 backdrop-blur-sm z-10 pb-3 pt-4 px-4">
+                            <div className="flex items-center justify-center gap-3 mb-3">
+                                <Weight size={36} className="text-orange-500" />
+                                <h1 className="text-3xl font-bold text-white">Strongman</h1>
+                            </div>
+
+                            {/* Navigation */}
+                            <div className="flex gap-1 bg-slate-800 rounded-xl p-1">
+                                <button
+                                    onClick={() => setActiveTab('blocks')}
+                                    className={`flex-1 py-3 px-2 rounded-lg font-semibold text-sm transition-all ${
+                                        activeTab === 'blocks'
+                                            ? 'bg-orange-600 text-white'
+                                            : 'text-slate-400'
+                                    }`}
+                                >
+                                    Blocks
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('exercises')}
+                                    className={`flex-1 py-3 px-2 rounded-lg font-semibold text-sm transition-all ${
+                                        activeTab === 'exercises'
+                                            ? 'bg-orange-600 text-white'
+                                            : 'text-slate-400'
+                                    }`}
+                                >
+                                    Exercises
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('progress')}
+                                    className={`flex-1 py-3 px-2 rounded-lg font-semibold text-sm transition-all ${
+                                        activeTab === 'progress'
+                                            ? 'bg-orange-600 text-white'
+                                            : 'text-slate-400'
+                                    }`}
+                                >
+                                    Progress
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Content Area with padding for mobile */}
+                        <div className="px-4 pb-20">
+                            {/* Training Blocks Tab */}
+                            {activeTab === 'blocks' && !currentBlock && !currentSession && (
+                                <div>
+                                    <div className="flex justify-between items-center mb-4">
+                                        <h2 className="text-xl font-bold text-white">Training Blocks</h2>
+                                        <button
+                                            onClick={createNewBlock}
+                                            className="flex items-center gap-2 bg-orange-600 active:bg-orange-700 text-white px-4 py-3 rounded-xl font-semibold"
+                                        >
+                                            <Plus size={20} />
+                                            <span className="hidden sm:inline">New Block</span>
+                                        </button>
+                                    </div>
+
+                                    {trainingBlocks.length === 0 ? (
+                                        <div className="text-center py-16 bg-slate-800 rounded-xl">
+                                            <Calendar size={56} className="mx-auto mb-4 text-slate-600" />
+                                            <h3 className="text-lg font-bold text-white mb-2">No Training Blocks</h3>
+                                            <p className="text-slate-400 text-sm px-4">Create your first training block to get started</p>
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-3">
+                                            {trainingBlocks.map(block => (
+                                                <div key={block.id} className="bg-slate-800 rounded-xl p-4 border-l-4 border-orange-500">
+                                                    <div className="flex justify-between items-start mb-3">
+                                                        <div className="flex-1 min-w-0 mr-2">
+                                                            <h3 className="text-lg font-bold text-white mb-1 truncate">{block.name}</h3>
+                                                            <p className="text-slate-400 text-xs">
+                                                                {formatDate(block.startDate)} {block.endDate && `- ${formatDate(block.endDate)}`}
+                                                            </p>
+                                                            <span className="inline-block mt-2 px-3 py-1 bg-orange-600 text-white text-xs rounded-full">
+                                                                {block.phase}
+                                                            </span>
+                                                        </div>
+                                                        <div className="flex gap-2 flex-shrink-0">
+                                                            <button
+                                                                onClick={() => editBlock(block)}
+                                                                className="p-3 bg-slate-700 active:bg-slate-600 text-white rounded-lg"
+                                                            >
+                                                                <Edit2 size={18} />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => deleteBlock(block.id)}
+                                                                className="p-3 bg-red-600 active:bg-red-700 text-white rounded-lg"
+                                                            >
+                                                                <Trash2 size={18} />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    {block.notes && (
+                                                        <p className="text-slate-300 text-sm mb-3 italic">{block.notes}</p>
+                                                    )}
+
+                                                    <div className="flex items-center justify-between mb-3">
+                                                        <p className="text-slate-400 text-sm">
+                                                            <strong className="text-white">{block.sessions.length}</strong> sessions • 
+                                                            <strong className="text-white"> {block.sessions.filter(s => s.completed).length}</strong> done
+                                                        </p>
+                                                        <button
+                                                            onClick={() => createSession(block.id)}
+                                                            className="flex items-center gap-2 bg-orange-600 active:bg-orange-700 text-white px-4 py-2 rounded-lg font-semibold text-sm"
+                                                        >
+                                                            <Plus size={16} />
+                                                            Session
+                                                        </button>
+                                                    </div>
+
+                                                    {block.sessions.length > 0 && (
+                                                        <div className="space-y-2">
+                                                            {block.sessions.slice(0, 3).map(session => (
+                                                                <div
+                                                                    key={session.id}
+                                                                    className={`flex justify-between items-center p-3 rounded-lg ${
+                                                                        session.completed ? 'bg-slate-700' : 'bg-slate-750'
+                                                                    }`}
+                                                                >
+                                                                    <div className="flex-1 min-w-0 mr-2">
+                                                                        <p className="text-white font-medium text-sm truncate">{session.name}</p>
+                                                                        <p className="text-slate-400 text-xs">
+                                                                            {formatDate(session.date)} • {session.exercises.length} ex
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="flex gap-2 flex-shrink-0">
+                                                                        {!session.completed && (
+                                                                            <>
+                                                                                <button
+                                                                                    onClick={() => editSession(block.id, session)}
+                                                                                    className="p-2 bg-slate-600 active:bg-slate-500 text-white rounded-lg"
+                                                                                >
+                                                                                    <Edit2 size={14} />
+                                                                                </button>
+                                                                                <button
+                                                                                    onClick={() => completeSession(block.id, session.id)}
+                                                                                    className="p-2 bg-green-600 active:bg-green-700 text-white rounded-lg"
+                                                                                >
+                                                                                    ✓
+                                                                                </button>
+                                                                            </>
+                                                                        )}
+                                                                        <button
+                                                                            onClick={() => deleteSession(block.id, session.id)}
+                                                                            className="p-2 bg-red-600 active:bg-red-700 text-white rounded-lg"
+                                                                        >
+                                                                            <Trash2 size={14} />
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Block Editor */}
+                            {currentBlock && !currentSession && (
+                                <div className="bg-slate-800 rounded-xl p-4">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <button
+                                            onClick={() => setCurrentBlock(null)}
+                                            className="p-2 bg-slate-700 active:bg-slate-600 text-white rounded-lg"
+                                        >
+                                            <ArrowLeft size={20} />
+                                        </button>
+                                        <h2 className="text-xl font-bold text-white">
+                                            {trainingBlocks.find(b => b.id === currentBlock.id) ? 'Edit' : 'Create'} Block
+                                        </h2>
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        <div>
+                                            <label className="block text-slate-300 mb-2 font-medium text-sm">Block Name</label>
+                                            <input
+                                                type="text"
+                                                value={currentBlock.name}
+                                                onChange={(e) => setCurrentBlock({ ...currentBlock, name: e.target.value })}
+                                                className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                                placeholder="e.g., 12-Week Strongman Prep"
+                                            />
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <label className="block text-slate-300 mb-2 font-medium text-sm">Start Date</label>
+                                                <input
+                                                    type="date"
+                                                    value={currentBlock.startDate.split('T')[0]}
+                                                    onChange={(e) => setCurrentBlock({ ...currentBlock, startDate: new Date(e.target.value).toISOString() })}
+                                                    className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-slate-300 mb-2 font-medium text-sm">End Date</label>
+                                                <input
+                                                    type="date"
+                                                    value={currentBlock.endDate ? currentBlock.endDate.split('T')[0] : ''}
+                                                    onChange={(e) => setCurrentBlock({ ...currentBlock, endDate: e.target.value ? new Date(e.target.value).toISOString() : null })}
+                                                    className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-slate-300 mb-2 font-medium text-sm">Training Phase</label>
+                                            <select
+                                                value={currentBlock.phase}
+                                                onChange={(e) => setCurrentBlock({ ...currentBlock, phase: e.target.value })}
+                                                className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                            >
+                                                <option value="Hypertrophy">Hypertrophy</option>
+                                                <option value="Strength">Strength</option>
+                                                <option value="Power">Power</option>
+                                                <option value="Peaking">Peaking</option>
+                                                <option value="Competition Prep">Competition Prep</option>
+                                                <option value="Off-Season">Off-Season</option>
+                                                <option value="Deload">Deload</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-slate-300 mb-2 font-medium text-sm">Notes</label>
+                                            <textarea
+                                                value={currentBlock.notes}
+                                                onChange={(e) => setCurrentBlock({ ...currentBlock, notes: e.target.value })}
+                                                className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                                rows="3"
+                                                placeholder="Block objectives, focus areas, etc."
+                                            />
+                                        </div>
+
+                                        <div className="flex gap-3 pt-2">
+                                            <button
+                                                onClick={saveBlock}
+                                                className="flex-1 flex items-center justify-center gap-2 bg-orange-600 active:bg-orange-700 text-white px-6 py-4 rounded-xl font-semibold"
+                                            >
+                                                <Save size={20} />
+                                                Save Block
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Session Editor */}
+                            {currentSession && (
+                                <div className="bg-slate-800 rounded-xl p-4">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <button
+                                            onClick={() => setCurrentSession(null)}
+                                            className="p-2 bg-slate-700 active:bg-slate-600 text-white rounded-lg"
+                                        >
+                                            <ArrowLeft size={20} />
+                                        </button>
+                                        <h2 className="text-xl font-bold text-white">Training Session</h2>
+                                    </div>
+
+                                    <div className="space-y-4 mb-4">
+                                        <div>
+                                            <label className="block text-slate-300 mb-2 font-medium text-sm">Session Name</label>
+                                            <input
+                                                type="text"
+                                                value={currentSession.name}
+                                                onChange={(e) => setCurrentSession({ ...currentSession, name: e.target.value })}
+                                                className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                                placeholder="e.g., Heavy Pressing Day"
+                                            />
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <label className="block text-slate-300 mb-2 font-medium text-sm">Date</label>
+                                                <input
+                                                    type="date"
+                                                    value={currentSession.date.split('T')[0]}
+                                                    onChange={(e) => setCurrentSession({ ...currentSession, date: new Date(e.target.value).toISOString() })}
+                                                    className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-slate-300 mb-2 font-medium text-sm">Duration (min)</label>
+                                                <input
+                                                    type="number"
+                                                    value={currentSession.duration}
+                                                    onChange={(e) => setCurrentSession({ ...currentSession, duration: parseInt(e.target.value) || 0 })}
+                                                    className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                                    placeholder="90"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-slate-300 mb-2 font-medium text-sm">Session Notes</label>
+                                            <textarea
+                                                value={currentSession.notes}
+                                                onChange={(e) => setCurrentSession({ ...currentSession, notes: e.target.value })}
+                                                className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                                rows="2"
+                                                placeholder="How did the session feel?"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Exercises in Session */}
+                                    <div className="mb-4">
+                                        <div className="flex justify-between items-center mb-3">
+                                            <h3 className="text-lg font-bold text-white">Exercises</h3>
+                                            <button
+                                                onClick={() => setShowExerciseModal(true)}
+                                                className="flex items-center gap-2 bg-orange-600 active:bg-orange-700 text-white px-4 py-3 rounded-lg font-semibold text-sm"
+                                            >
+                                                <Plus size={18} />
+                                                Add
+                                            </button>
+                                        </div>
+
+                                        {currentSession.exercises.length === 0 ? (
+                                            <div className="text-center py-12 bg-slate-700 rounded-xl">
+                                                <Dumbbell size={48} className="mx-auto mb-3 text-slate-600" />
+                                                <p className="text-slate-400 text-sm">No exercises yet</p>
+                                            </div>
+                                        ) : (
+                                            <div className="space-y-3">
+                                                {currentSession.exercises.map((exercise, exIndex) => (
+                                                    <div key={exercise.id} className="bg-slate-700 rounded-xl p-3">
+                                                        <div className="flex justify-between items-start mb-3">
+                                                            <div className="flex-1 min-w-0 mr-2">
+                                                                <div className="flex items-center gap-2 mb-1">
+                                                                    <span className="bg-orange-600 text-white text-xs font-bold px-2 py-1 rounded flex-shrink-0">
+                                                                        {exIndex + 1}
+                                                                    </span>
+                                                                    <h4 className="text-base font-bold text-white truncate">{exercise.name}</h4>
+                                                                </div>
+                                                                <p className="text-slate-400 text-xs">
+                                                                    {exercise.equipment} • {exercise.category}
+                                                                </p>
+                                                            </div>
+                                                            <button
+                                                                onClick={() => removeExerciseFromSession(exercise.id)}
+                                                                className="p-2 bg-red-600 active:bg-red-700 text-white rounded-lg flex-shrink-0"
+                                                            >
+                                                                <Trash2 size={16} />
+                                                            </button>
+                                                        </div>
+
+                                                        {/* Sets */}
+                                                        <div className="space-y-2 mb-3">
+                                                            {exercise.sets.map((set, setIndex) => (
+                                                                <div key={set.id} className="flex gap-2 items-center">
+                                                                    <button
+                                                                        onClick={() => toggleSetComplete(exercise.id, set.id)}
+                                                                        className={`p-3 rounded-lg font-bold text-sm flex-shrink-0 ${
+                                                                            set.completed
+                                                                                ? 'bg-green-600 text-white'
+                                                                                : 'bg-slate-600 text-slate-300'
+                                                                        }`}
+                                                                    >
+                                                                        {set.completed ? '✓' : setIndex + 1}
+                                                                    </button>
+                                                                    <input
+                                                                        type="text"
+                                                                        value={set.weight}
+                                                                        onChange={(e) => updateSet(exercise.id, set.id, 'weight', e.target.value)}
+                                                                        className="w-20 bg-slate-600 text-white px-2 py-3 rounded-lg border-2 border-slate-500 focus:border-orange-500 focus:outline-none text-sm"
+                                                                        placeholder="Wt"
+                                                                    />
+                                                                    <span className="text-slate-400 text-sm">×</span>
+                                                                    <input
+                                                                        type="text"
+                                                                        value={set.reps}
+                                                                        onChange={(e) => updateSet(exercise.id, set.id, 'reps', e.target.value)}
+                                                                        className="w-16 bg-slate-600 text-white px-2 py-3 rounded-lg border-2 border-slate-500 focus:border-orange-500 focus:outline-none text-sm"
+                                                                        placeholder="Rep"
+                                                                    />
+                                                                    <input
+                                                                        type="text"
+                                                                        value={set.duration}
+                                                                        onChange={(e) => updateSet(exercise.id, set.id, 'duration', e.target.value)}
+                                                                        className="flex-1 bg-slate-600 text-white px-2 py-3 rounded-lg border-2 border-slate-500 focus:border-orange-500 focus:outline-none text-sm"
+                                                                        placeholder="Time"
+                                                                    />
+                                                                    <button
+                                                                        onClick={() => deleteSet(exercise.id, set.id)}
+                                                                        className="p-3 bg-red-600 active:bg-red-700 text-white rounded-lg flex-shrink-0"
+                                                                    >
+                                                                        <Trash2 size={14} />
+                                                                    </button>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+
+                                                        <button
+                                                            onClick={() => addSetToExercise(exercise.id)}
+                                                            className="w-full flex items-center justify-center gap-2 bg-slate-600 active:bg-slate-500 text-white px-4 py-3 rounded-lg font-medium text-sm"
+                                                        >
+                                                            <Plus size={16} />
+                                                            Add Set
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Save Button */}
+                                    <button
+                                        onClick={saveSession}
+                                        className="w-full flex items-center justify-center gap-2 bg-orange-600 active:bg-orange-700 text-white px-6 py-4 rounded-xl font-semibold"
+                                    >
+                                        <Save size={20} />
+                                        Save Session
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* Exercise Library Tab */}
+                            {activeTab === 'exercises' && (
+                                <div>
+                                    <h2 className="text-xl font-bold text-white mb-3">Exercise Library</h2>
+
+                                    {/* Search */}
+                                    <div className="relative mb-3">
+                                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+                                        <input
+                                            type="text"
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            className="w-full bg-slate-800 text-white pl-11 pr-4 py-3 rounded-xl border-2 border-slate-700 focus:border-orange-500 focus:outline-none"
+                                            placeholder="Search exercises..."
+                                        />
+                                    </div>
+
+                                    {/* Category Filter */}
+                                    <div className="flex gap-2 mb-3 overflow-x-auto pb-2">
+                                        {categories.map(cat => (
+                                            <button
+                                                key={cat}
+                                                onClick={() => setSelectedCategory(cat)}
+                                                className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap text-sm ${
+                                                    selectedCategory === cat
+                                                        ? 'bg-orange-600 text-white'
+                                                        : 'bg-slate-800 text-slate-400'
+                                                }`}
+                                            >
+                                                {cat}
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        {filteredExercises.map(exercise => (
+                                            <div key={exercise.name} className="bg-slate-800 rounded-xl overflow-hidden">
+                                                <div
+                                                    onClick={() => toggleExerciseExpand(exercise.name)}
+                                                    className="p-4 active:bg-slate-750"
+                                                >
+                                                    <div className="flex justify-between items-start">
+                                                        <div className="flex-1 min-w-0 mr-2">
+                                                            <h3 className="text-base font-bold text-white mb-2">{exercise.name}</h3>
+                                                            <div className="flex gap-2 flex-wrap">
+                                                                <span className="px-2 py-1 bg-orange-600 text-white text-xs rounded-full">
+                                                                    {exercise.category}
+                                                                </span>
+                                                                <span className="px-2 py-1 bg-slate-700 text-slate-300 text-xs rounded-full">
+                                                                    {exercise.equipment}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        {expandedExercises[exercise.name] ? (
+                                                            <ChevronUp size={20} className="text-slate-400 flex-shrink-0" />
+                                                        ) : (
+                                                            <ChevronDown size={20} className="text-slate-400 flex-shrink-0" />
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                {expandedExercises[exercise.name] && (
+                                                    <div className="px-4 pb-4 border-t border-slate-700">
+                                                        <div className="pt-3">
+                                                            <p className="text-slate-300 text-sm mb-3">{exercise.notes}</p>
+                                                            {exercise.variations && exercise.variations.length > 0 && (
+                                                                <div>
+                                                                    <p className="text-slate-400 text-xs font-semibold mb-2">Variations:</p>
+                                                                    <div className="flex flex-wrap gap-2">
+                                                                        {exercise.variations.map(variation => (
+                                                                            <span
+                                                                                key={variation}
+                                                                                className="px-3 py-1 bg-slate-700 text-slate-300 text-xs rounded-lg"
+                                                                            >
+                                                                                {variation}
+                                                                            </span>
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Progress Tab */}
+                            {activeTab === 'progress' && (
+                                <div>
+                                    <h2 className="text-xl font-bold text-white mb-4">Training Progress</h2>
+
+                                    {trainingBlocks.length === 0 ? (
+                                        <div className="text-center py-16 bg-slate-800 rounded-xl">
+                                            <TrendingUp size={56} className="mx-auto mb-4 text-slate-600" />
+                                            <h3 className="text-lg font-bold text-white mb-2">No Data Yet</h3>
+                                            <p className="text-slate-400 text-sm px-4">Start tracking your training to see progress</p>
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            {/* Overall Stats */}
+                                            <div className="grid grid-cols-3 gap-3">
+                                                <div className="bg-slate-800 rounded-xl p-4">
+                                                    <p className="text-slate-400 text-xs mb-1">Blocks</p>
+                                                    <p className="text-2xl font-bold text-white">{trainingBlocks.length}</p>
+                                                </div>
+                                                <div className="bg-slate-800 rounded-xl p-4">
+                                                    <p className="text-slate-400 text-xs mb-1">Sessions</p>
+                                                    <p className="text-2xl font-bold text-white">
+                                                        {trainingBlocks.reduce((sum, block) => sum + block.sessions.length, 0)}
+                                                    </p>
+                                                </div>
+                                                <div className="bg-slate-800 rounded-xl p-4">
+                                                    <p className="text-slate-400 text-xs mb-1">Done</p>
+                                                    <p className="text-2xl font-bold text-white">
+                                                        {trainingBlocks.reduce(
+                                                            (sum, block) => sum + block.sessions.filter(s => s.completed).length,
+                                                            0
+                                                        )}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            {/* Recent Activity */}
+                                            <div className="bg-slate-800 rounded-xl p-4">
+                                                <h3 className="text-lg font-bold text-white mb-3">Recent Activity</h3>
+                                                <div className="space-y-2">
+                                                    {trainingBlocks
+                                                        .flatMap(block =>
+                                                            block.sessions.map(session => ({
+                                                                ...session,
+                                                                blockName: block.name
+                                                            }))
+                                                        )
+                                                        .sort((a, b) => new Date(b.date) - new Date(a.date))
+                                                        .slice(0, 10)
+                                                        .map(session => (
+                                                            <div
+                                                                key={session.id}
+                                                                className="flex justify-between items-center p-3 bg-slate-700 rounded-lg"
+                                                            >
+                                                                <div className="flex-1 min-w-0 mr-2">
+                                                                    <p className="text-white font-medium text-sm truncate">{session.name}</p>
+                                                                    <p className="text-slate-400 text-xs">
+                                                                        {session.blockName} • {formatDate(session.date)}
+                                                                    </p>
+                                                                </div>
+                                                                <div className="text-right flex-shrink-0">
+                                                                    <p className="text-white font-medium text-sm">{session.exercises.length} ex</p>
+                                                                    {session.completed && (
+                                                                        <span className="text-green-400 text-xs">✓ Done</span>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Exercise Selection Modal */}
+                        {showExerciseModal && (
+                            <div className="fixed inset-0 bg-black bg-opacity-90 flex items-end sm:items-center justify-center z-50">
+                                <div className="bg-slate-800 rounded-t-3xl sm:rounded-2xl w-full sm:max-w-2xl max-h-[90vh] overflow-hidden flex flex-col safe-area-inset">
+                                    <div className="p-4 border-b border-slate-700 flex-shrink-0">
+                                        <div className="flex justify-between items-center mb-3">
+                                            <h3 className="text-xl font-bold text-white">Select Exercise</h3>
+                                            <button
+                                                onClick={() => {
+                                                    setShowExerciseModal(false);
+                                                    setSearchTerm('');
+                                                    setSelectedCategory('All');
+                                                }}
+                                                className="p-2 bg-slate-700 active:bg-slate-600 text-white rounded-lg"
+                                            >
+                                                <X size={20} />
+                                            </button>
+                                        </div>
+
+                                        <div className="relative mb-3">
+                                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={18} />
+                                            <input
+                                                type="text"
+                                                value={searchTerm}
+                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                className="w-full bg-slate-700 text-white pl-10 pr-4 py-3 rounded-lg border-2 border-slate-600 focus:border-orange-500 focus:outline-none"
+                                                placeholder="Search exercises..."
+                                            />
+                                        </div>
+
+                                        <div className="flex gap-2 overflow-x-auto pb-2">
+                                            {categories.map(cat => (
+                                                <button
+                                                    key={cat}
+                                                    onClick={() => setSelectedCategory(cat)}
+                                                    className={`px-3 py-2 rounded-lg font-medium whitespace-nowrap text-xs ${
+                                                        selectedCategory === cat
+                                                            ? 'bg-orange-600 text-white'
+                                                            : 'bg-slate-700 text-slate-400'
+                                                    }`}
+                                                >
+                                                    {cat}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="overflow-y-auto p-4 flex-1">
+                                        <div className="space-y-2">
+                                            {filteredExercises.map(exercise => (
+                                                <button
+                                                    key={exercise.name}
+                                                    onClick={() => addExerciseToSession(exercise)}
+                                                    className="w-full text-left p-4 bg-slate-700 active:bg-slate-600 rounded-xl"
+                                                >
+                                                    <div className="flex justify-between items-start">
+                                                        <div className="flex-1 min-w-0 mr-2">
+                                                            <h4 className="text-white font-bold mb-2">{exercise.name}</h4>
+                                                            <div className="flex gap-2 flex-wrap mb-2">
+                                                                <span className="px-2 py-1 bg-orange-600 text-white text-xs rounded-full">
+                                                                    {exercise.category}
+                                                                </span>
+                                                                <span className="px-2 py-1 bg-slate-600 text-slate-300 text-xs rounded-full">
+                                                                    {exercise.equipment}
+                                                                </span>
+                                                            </div>
+                                                            <p className="text-slate-400 text-xs">{exercise.notes}</p>
+                                                        </div>
+                                                        <Plus size={24} className="text-orange-500 flex-shrink-0" />
+                                                    </div>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<StrongmanTrainingApp />);
+    </script>
+</body>
+</html>
