@@ -174,87 +174,188 @@
             const [selectedCategory, setSelectedCategory] = useState('All');
             const [expandedExercises, setExpandedExercises] = useState({});
 
-            // Comprehensive strongman exercise library
+            // Comprehensive exercise library - Strongman, Powerlifting, and Bodybuilding
             const [exerciseLibrary] = useState([
-                // Pressing Events
-                { name: 'Log Press', category: 'Pressing', equipment: 'Log', variations: ['Strict', 'Push Press', 'Split Jerk', 'Continental Clean'], notes: 'Max effort or reps in 60-75 seconds' },
-                { name: 'Axle Press', category: 'Pressing', equipment: 'Axle', variations: ['Strict', 'Push Press', 'Continental Clean & Press'], notes: 'Thick bar challenges grip' },
-                { name: 'Circus Dumbbell', category: 'Pressing', equipment: 'Circus DB', variations: ['Single Arm', 'Alternating', 'Max Reps'], notes: 'Often 100-150+ lbs' },
-                { name: 'Viking Press', category: 'Pressing', equipment: 'Viking Press', variations: ['Seated', 'Standing', 'Single Arm'], notes: 'Neutral grip pressing' },
-                { name: 'Apollon Axle', category: 'Pressing', equipment: 'Apollon Axle', variations: ['Clean & Press', 'Continental'], notes: 'Extra thick 3" axle' },
+                // STRONGMAN - Pressing Events
+                { name: 'Log Press', category: 'Strongman Pressing', equipment: 'Log', variations: ['Strict', 'Push Press', 'Split Jerk', 'Continental Clean'], notes: 'Max effort or reps in 60-75 seconds' },
+                { name: 'Axle Press', category: 'Strongman Pressing', equipment: 'Axle', variations: ['Strict', 'Push Press', 'Continental Clean & Press'], notes: 'Thick bar challenges grip' },
+                { name: 'Circus Dumbbell', category: 'Strongman Pressing', equipment: 'Circus DB', variations: ['Single Arm', 'Alternating', 'Max Reps'], notes: 'Often 100-150+ lbs' },
+                { name: 'Viking Press', category: 'Strongman Pressing', equipment: 'Viking Press', variations: ['Seated', 'Standing', 'Single Arm'], notes: 'Neutral grip pressing' },
+                { name: 'Apollon Axle', category: 'Strongman Pressing', equipment: 'Apollon Axle', variations: ['Clean & Press', 'Continental'], notes: 'Extra thick 3" axle' },
                 
-                // Deadlift Events
-                { name: 'Deadlift (Standard)', category: 'Deadlift', equipment: 'Barbell', variations: ['Conventional', 'Sumo', 'Deficit', 'Block Pulls'], notes: 'Competition max or reps' },
-                { name: 'Elephant Bar Deadlift', category: 'Deadlift', equipment: 'Elephant Bar', variations: ['Max Single', 'Rep Max'], notes: 'Long, flexible bar' },
-                { name: 'Tire Deadlift', category: 'Deadlift', equipment: 'Tire Frame', variations: ['18" Height', 'Standard Height'], notes: 'Frame deadlift with tires' },
-                { name: 'Car Deadlift', category: 'Deadlift', equipment: 'Car Deadlift Frame', variations: ['Max Reps in 60s', 'Max Height Hold'], notes: 'Typically 18" handles' },
-                { name: 'Silver Dollar Deadlift', category: 'Deadlift', equipment: 'Silver Dollar Bar', variations: ['13" Height', 'Standard'], notes: 'Thick handled frame' },
-                { name: 'Hummer Tire Deadlift', category: 'Deadlift', equipment: 'Hummer Tire Frame', variations: ['Max Reps', 'Time Hold'], notes: 'Popular competition event' },
+                // STRONGMAN - Deadlift Events
+                { name: 'Elephant Bar Deadlift', category: 'Strongman Deadlift', equipment: 'Elephant Bar', variations: ['Max Single', 'Rep Max'], notes: 'Long, flexible bar' },
+                { name: 'Tire Deadlift', category: 'Strongman Deadlift', equipment: 'Tire Frame', variations: ['18" Height', 'Standard Height'], notes: 'Frame deadlift with tires' },
+                { name: 'Car Deadlift', category: 'Strongman Deadlift', equipment: 'Car Deadlift Frame', variations: ['Max Reps in 60s', 'Max Height Hold'], notes: 'Typically 18" handles' },
+                { name: 'Silver Dollar Deadlift', category: 'Strongman Deadlift', equipment: 'Silver Dollar Bar', variations: ['13" Height', 'Standard'], notes: 'Thick handled frame' },
+                { name: 'Hummer Tire Deadlift', category: 'Strongman Deadlift', equipment: 'Hummer Tire Frame', variations: ['Max Reps', 'Time Hold'], notes: 'Popular competition event' },
                 
-                // Carrying Events
-                { name: "Farmer's Walk", category: 'Carrying', equipment: "Farmer's Handles", variations: ['Max Distance', 'Timed', 'Max Weight'], notes: 'Classic strongman event' },
-                { name: 'Yoke Walk', category: 'Carrying', equipment: 'Yoke', variations: ['Heavy', 'Speed', 'Ascending Weight'], notes: 'Back loaded carry' },
-                { name: 'Frame Carry', category: 'Carrying', equipment: 'Frame', variations: ['Heavy', 'Speed', 'Distance'], notes: 'Similar to farmer but single implement' },
-                { name: 'Super Yoke', category: 'Carrying', equipment: 'Super Yoke', variations: ['Max Distance', 'Time Trial'], notes: 'Extra heavy yoke variant' },
-                { name: 'Duck Walk', category: 'Carrying', equipment: 'Duck Walk Handles', variations: ['Goblet Style', 'Low Handles'], notes: 'Wide stance carry' },
-                { name: 'Sandbag Carry', category: 'Carrying', equipment: 'Sandbag', variations: ['Bear Hug', 'Shoulder', 'Zercher'], notes: 'Awkward object carry' },
-                { name: 'Keg Carry', category: 'Carrying', equipment: 'Keg', variations: ['Bear Hug', 'Shoulder', 'Multiple Kegs'], notes: 'Shifting weight' },
+                // STRONGMAN - Carrying Events
+                { name: "Farmer's Walk", category: 'Strongman Carrying', equipment: "Farmer's Handles", variations: ['Max Distance', 'Timed', 'Max Weight'], notes: 'Classic strongman event' },
+                { name: 'Yoke Walk', category: 'Strongman Carrying', equipment: 'Yoke', variations: ['Heavy', 'Speed', 'Ascending Weight'], notes: 'Back loaded carry' },
+                { name: 'Frame Carry', category: 'Strongman Carrying', equipment: 'Frame', variations: ['Heavy', 'Speed', 'Distance'], notes: 'Similar to farmer but single implement' },
+                { name: 'Super Yoke', category: 'Strongman Carrying', equipment: 'Super Yoke', variations: ['Max Distance', 'Time Trial'], notes: 'Extra heavy yoke variant' },
+                { name: 'Sandbag Carry', category: 'Strongman Carrying', equipment: 'Sandbag', variations: ['Bear Hug', 'Shoulder', 'Zercher'], notes: 'Awkward object carry' },
+                { name: 'Keg Carry', category: 'Strongman Carrying', equipment: 'Keg', variations: ['Bear Hug', 'Shoulder', 'Multiple Kegs'], notes: 'Shifting weight' },
                 
-                // Loading Events
-                { name: 'Atlas Stones', category: 'Loading', equipment: 'Atlas Stones', variations: ['Ascending Weight', 'Single Rep Max', 'Time Challenge'], notes: 'Load to platforms 48"-54"' },
-                { name: 'Sandbag Load', category: 'Loading', equipment: 'Sandbag', variations: ['Over Bar', 'To Platform', 'Multiple Bags'], notes: '200-400 lbs typically' },
-                { name: 'Keg Toss', category: 'Loading', equipment: 'Keg', variations: ['Over Bar', 'Max Height'], notes: 'Explosive loading' },
-                { name: 'Barrel Load', category: 'Loading', equipment: 'Barrel', variations: ['To Platform', 'Distance Series'], notes: 'Similar to keg' },
-                { name: 'Natural Stone Load', category: 'Loading', equipment: 'Natural Stone', variations: ['Various Heights', 'Max Single'], notes: 'Irregular shape' },
+                // STRONGMAN - Loading/Throwing
+                { name: 'Atlas Stones', category: 'Strongman Loading', equipment: 'Atlas Stones', variations: ['Ascending Weight', 'Single Rep Max', 'Time Challenge'], notes: 'Load to platforms 48"-54"' },
+                { name: 'Sandbag Load', category: 'Strongman Loading', equipment: 'Sandbag', variations: ['Over Bar', 'To Platform', 'Multiple Bags'], notes: '200-400 lbs typically' },
+                { name: 'Keg Toss', category: 'Strongman Loading', equipment: 'Keg', variations: ['Over Bar', 'Max Height'], notes: 'Explosive loading' },
+                { name: 'Weight Over Bar', category: 'Strongman Loading', equipment: 'Weight (56lb/25kg)', variations: ['Max Height', 'Distance'], notes: 'Highland games style' },
                 
-                // Pulling Events
-                { name: 'Truck Pull', category: 'Pulling', equipment: 'Truck/Harness', variations: ['Speed', 'Distance', 'Heavy'], notes: '25-75 feet typical' },
-                { name: 'Plane Pull', category: 'Pulling', equipment: 'Plane/Harness', variations: ['Team', 'Solo', 'Speed'], notes: 'Ultimate pulling event' },
-                { name: 'Bus Pull', category: 'Pulling', equipment: 'Bus/Harness', variations: ['Distance', 'Time Trial'], notes: 'Heavy pulling' },
-                { name: 'Sled Drag', category: 'Pulling', equipment: 'Sled/Harness', variations: ['Backward', 'Forward', 'Heavy'], notes: 'Conditioning and strength' },
-                { name: 'Arm Over Arm', category: 'Pulling', equipment: 'Rope/Sled', variations: ['Seated', 'Standing', 'Truck Pull Style'], notes: 'Hand over hand pulling' },
+                // STRONGMAN - Pulling/Grip
+                { name: 'Truck Pull', category: 'Strongman Pulling', equipment: 'Truck/Harness', variations: ['Speed', 'Distance', 'Heavy'], notes: '25-75 feet typical' },
+                { name: 'Sled Drag', category: 'Strongman Pulling', equipment: 'Sled/Harness', variations: ['Backward', 'Forward', 'Heavy'], notes: 'Conditioning and strength' },
+                { name: 'Hercules Hold', category: 'Strongman Pulling', equipment: 'Hercules Hold', variations: ['Max Time', 'Increasing Weight'], notes: 'Pillar hold apart' },
+                { name: 'Fingal Fingers', category: 'Strongman Pulling', equipment: 'Fingal Fingers', variations: ['5 Fingers', '3 Fingers', 'Time Trial'], notes: 'Flip large poles' },
                 
-                // Grip Events
-                { name: 'Hercules Hold', category: 'Grip/Hold', equipment: 'Hercules Hold', variations: ['Max Time', 'Increasing Weight'], notes: 'Pillar hold apart' },
-                { name: 'Fingal Fingers', category: 'Grip/Hold', equipment: 'Fingal Fingers', variations: ['5 Fingers', '3 Fingers', 'Time Trial'], notes: 'Flip large poles' },
-                { name: 'Timber Carry', category: 'Grip/Hold', equipment: 'Log/Timber', variations: ['Max Distance', 'Max Time'], notes: 'Front carry with thick log' },
-                { name: 'Husafell Stone', category: 'Grip/Hold', equipment: 'Husafell Stone', variations: ['Max Distance', 'Time Hold'], notes: 'Flat stone carry' },
-                { name: 'Anvil Hold', category: 'Grip/Hold', equipment: 'Anvil', variations: ['Horn Hold', 'Time Challenge'], notes: 'Awkward grip hold' },
+                // POWERLIFTING - Main Lifts
+                { name: 'Squat (Back Squat)', category: 'Powerlifting', equipment: 'Barbell', variations: ['Low Bar', 'High Bar', 'Box Squat', 'Pause Squat'], notes: 'The king of leg exercises' },
+                { name: 'Bench Press', category: 'Powerlifting', equipment: 'Barbell', variations: ['Competition Style', 'Wide Grip', 'Close Grip', 'Pause', 'Touch and Go'], notes: 'Primary chest and tricep builder' },
+                { name: 'Deadlift', category: 'Powerlifting', equipment: 'Barbell', variations: ['Conventional', 'Sumo', 'Deficit', 'Block Pulls', 'Paused'], notes: 'Full body strength developer' },
                 
-                // Static Strength
-                { name: 'Conan Wheel', category: 'Static Strength', equipment: "Conan's Wheel", variations: ['Max Reps', 'Time Trial', 'Weight Progression'], notes: 'Circular walking hold' },
-                { name: 'Chain Hold', category: 'Static Strength', equipment: 'Chains', variations: ['Overhead', 'Front Hold'], notes: 'Hold heavy chains' },
-                { name: 'Crucifix Hold', category: 'Static Strength', equipment: 'Weights/Apparatus', variations: ['Max Time', 'Weight Challenge'], notes: 'Arms extended laterally' },
+                // POWERLIFTING - Squat Variations
+                { name: 'Front Squat', category: 'Powerlifting', equipment: 'Barbell', variations: ['Olympic Style', 'Cross Arm', 'Pause', 'Tempo'], notes: 'Quad and core emphasis' },
+                { name: 'Safety Squat Bar Squat', category: 'Powerlifting', equipment: 'SSB', variations: ['High Bar Position', 'Low', 'Box Squat'], notes: 'Upper back development' },
+                { name: 'Box Squat', category: 'Powerlifting', equipment: 'Barbell', variations: ['Wide Stance', 'Narrow Stance', 'Pause on Box'], notes: 'Hip and posterior chain focus' },
+                { name: 'Bulgarian Split Squat', category: 'Powerlifting', equipment: 'Barbell/Dumbbells', variations: ['Barbell', 'Dumbbell', 'Goblet Style'], notes: 'Single leg strength and balance' },
                 
-                // Throwing Events
-                { name: 'Weight Over Bar', category: 'Throwing', equipment: 'Weight (56lb/25kg)', variations: ['Max Height', 'Distance'], notes: 'Highland games style' },
-                { name: 'Keg Toss (Height)', category: 'Throwing', equipment: 'Keg', variations: ['Max Height', 'Multiple Attempts'], notes: 'Throw for height' },
+                // POWERLIFTING - Bench Variations
+                { name: 'Incline Bench Press', category: 'Powerlifting', equipment: 'Barbell', variations: ['30°', '45°', 'Close Grip', 'Pause'], notes: 'Upper chest development' },
+                { name: 'Floor Press', category: 'Powerlifting', equipment: 'Barbell', variations: ['Close Grip', 'Wide Grip', 'Feet Up', 'Chains'], notes: 'Lockout strength and triceps' },
+                { name: 'Board Press', category: 'Powerlifting', equipment: 'Barbell', variations: ['1 Board', '2 Board', '3 Board'], notes: 'Partial ROM for overload' },
+                { name: 'Pin Press', category: 'Powerlifting', equipment: 'Barbell', variations: ['Various Heights', 'From Bottom', 'Mid Range'], notes: 'Weak point training' },
+                { name: 'Spoto Press', category: 'Powerlifting', equipment: 'Barbell', variations: ['1 inch pause', '2 inch pause'], notes: 'Pause just above chest' },
                 
-                // Accessory/Support Work
-                { name: 'Axle Deadlift', category: 'Accessory', equipment: 'Axle', variations: ['Conventional', 'Deficit', 'High Pulls'], notes: 'Grip and pull strength' },
-                { name: 'Log Clean', category: 'Accessory', equipment: 'Log', variations: ['Continental', 'Strict Clean', 'Lap to Chest'], notes: 'Practice log technique' },
-                { name: 'Stone Simulator', category: 'Accessory', equipment: 'Sandbag/Simulator', variations: ['Floor to Lap', 'Lap to Chest', 'Full Extension'], notes: 'Atlas stone practice' },
-                { name: 'Front Squat', category: 'Accessory', equipment: 'Barbell/SSB', variations: ['High Bar', 'SSB', 'Pause'], notes: 'Leg and core strength' },
-                { name: 'Safety Squat Bar Squat', category: 'Accessory', equipment: 'SSB', variations: ['High Bar Position', 'Low', 'Box Squat'], notes: 'Upper back development' },
-                { name: 'Belt Squat', category: 'Accessory', equipment: 'Belt Squat Machine', variations: ['High Reps', 'Heavy', 'Paused'], notes: 'Leg volume without back stress' },
-                { name: 'Overhead Squat', category: 'Accessory', equipment: 'Barbell/Log', variations: ['Behind Neck', 'Log', 'Snatch Grip'], notes: 'Mobility and stability' },
-                { name: 'Good Morning', category: 'Accessory', equipment: 'Barbell/SSB', variations: ['Bent Over', 'Seated', 'Banded'], notes: 'Posterior chain' },
-                { name: 'Romanian Deadlift', category: 'Accessory', equipment: 'Barbell/Axle', variations: ['Stiff Leg', 'Single Leg', 'Deficit'], notes: 'Hamstring and back' },
-                { name: 'Block Pulls', category: 'Accessory', equipment: 'Barbell', variations: ['Mid Shin', 'Knee Height', 'Heavy Singles'], notes: 'Lockout strength' },
-                { name: 'Zercher Squat', category: 'Accessory', equipment: 'Barbell/Axle', variations: ['Box', 'Pause', 'Anderson'], notes: 'Core and upper back' },
-                { name: 'Stone to Shoulder', category: 'Accessory', equipment: 'Atlas Stone', variations: ['Alternating', 'Single Shoulder', 'Multiple Reps'], notes: 'Stone conditioning' },
-                { name: 'Yoke Squat', category: 'Accessory', equipment: 'Yoke', variations: ['Walk Out Squat', 'Static Hold Squat'], notes: 'Combines carry and squat' },
-                { name: 'Pin Press', category: 'Accessory', equipment: 'Barbell/Log', variations: ['Various Heights', 'Pause', 'Lockout Focus'], notes: 'Pressing strength' },
-                { name: 'Floor Press', category: 'Accessory', equipment: 'Barbell/Axle/Log', variations: ['Close Grip', 'Wide Grip', 'Feet Up'], notes: 'Lockout and triceps' },
-                { name: 'Incline Press', category: 'Accessory', equipment: 'Barbell/Axle', variations: ['Various Angles', 'Close Grip'], notes: 'Upper chest and shoulders' },
-                { name: 'Dips', category: 'Accessory', equipment: 'Dip Station', variations: ['Weighted', 'Bodyweight', 'Chest Focus'], notes: 'Pressing assistance' },
-                { name: 'Pull-ups/Chin-ups', category: 'Accessory', equipment: 'Pull-up Bar', variations: ['Weighted', 'Neutral Grip', 'Wide Grip'], notes: 'Back and arm strength' },
-                { name: 'Rows (Barbell/T-Bar)', category: 'Accessory', equipment: 'Barbell/T-Bar', variations: ['Pendlay', 'Yates', 'Seal Row'], notes: 'Back thickness' },
-                { name: 'Shrugs', category: 'Accessory', equipment: 'Barbell/Trap Bar/Dumbbells', variations: ['Heavy', 'High Rep', 'Behind Back'], notes: 'Trap development' },
-                { name: 'Farmer Walk (Short)', category: 'Accessory', equipment: "Farmer's Handles", variations: ['Heavy', 'Speed', 'Multiple Trips'], notes: 'Grip and core' },
+                // POWERLIFTING - Deadlift Variations
+                { name: 'Romanian Deadlift', category: 'Powerlifting', equipment: 'Barbell', variations: ['Stiff Leg', 'Single Leg', 'Deficit'], notes: 'Hamstring and lower back' },
+                { name: 'Sumo Deadlift', category: 'Powerlifting', equipment: 'Barbell', variations: ['Wide Stance', 'Semi-Sumo', 'Deficit'], notes: 'Hip-dominant pulling' },
+                { name: 'Trap Bar Deadlift', category: 'Powerlifting', equipment: 'Trap Bar', variations: ['High Handles', 'Low Handles'], notes: 'Safer for some lifters' },
+                { name: 'Good Morning', category: 'Powerlifting', equipment: 'Barbell/SSB', variations: ['Bent Over', 'Seated', 'Banded'], notes: 'Posterior chain strengthening' },
+                
+                // CHEST - Barbell
+                { name: 'Flat Barbell Bench Press', category: 'Chest', equipment: 'Barbell', variations: ['Wide Grip', 'Medium Grip', 'Close Grip', 'Pause'], notes: 'Classic chest builder' },
+                { name: 'Incline Barbell Press', category: 'Chest', equipment: 'Barbell', variations: ['Low Incline (15-30°)', 'High Incline (30-45°)'], notes: 'Upper chest focus' },
+                { name: 'Decline Barbell Press', category: 'Chest', equipment: 'Barbell', variations: ['Slight Decline', 'Steep Decline'], notes: 'Lower chest emphasis' },
+                
+                // CHEST - Dumbbell
+                { name: 'Dumbbell Bench Press', category: 'Chest', equipment: 'Dumbbells', variations: ['Flat', 'Incline', 'Decline', 'Neutral Grip'], notes: 'Greater ROM than barbell' },
+                { name: 'Dumbbell Fly', category: 'Chest', equipment: 'Dumbbells', variations: ['Flat', 'Incline', 'Decline'], notes: 'Chest stretch and isolation' },
+                { name: 'Dumbbell Pullover', category: 'Chest', equipment: 'Dumbbell', variations: ['Across Bench', 'Lengthwise'], notes: 'Chest and lat involvement' },
+                
+                // CHEST - Cables/Machines
+                { name: 'Cable Fly', category: 'Chest', equipment: 'Cable Machine', variations: ['High to Low', 'Low to High', 'Mid Level'], notes: 'Constant tension on pecs' },
+                { name: 'Cable Crossover', category: 'Chest', equipment: 'Cable Machine', variations: ['High', 'Mid', 'Low'], notes: 'Inner chest squeeze' },
+                { name: 'Chest Press Machine', category: 'Chest', equipment: 'Machine', variations: ['Flat', 'Incline', 'Decline'], notes: 'Stable pressing movement' },
+                { name: 'Pec Deck', category: 'Chest', equipment: 'Machine', variations: ['Standard', 'Wide Arms'], notes: 'Pec isolation' },
+                
+                // BACK - Barbell
+                { name: 'Barbell Row', category: 'Back', equipment: 'Barbell', variations: ['Pendlay Row', 'Bent Over Row', 'Underhand Grip', 'Yates Row'], notes: 'Back thickness' },
+                { name: 'T-Bar Row', category: 'Back', equipment: 'Barbell/T-Bar', variations: ['V-Handle', 'Wide Grip', 'Chest Supported'], notes: 'Mid back developer' },
+                { name: 'Barbell Shrug', category: 'Back', equipment: 'Barbell', variations: ['Behind Back', 'Front', 'Power Shrug'], notes: 'Trap development' },
+                
+                // BACK - Dumbbell
+                { name: 'Dumbbell Row', category: 'Back', equipment: 'Dumbbells', variations: ['One Arm', 'Both Arms', 'Chest Supported'], notes: 'Lat and mid back' },
+                { name: 'Dumbbell Shrug', category: 'Back', equipment: 'Dumbbells', variations: ['Standard', 'Incline', 'Walking'], notes: 'Upper trap focus' },
+                { name: 'Dumbbell Pullover', category: 'Back', equipment: 'Dumbbell', variations: ['Across Bench', 'Decline'], notes: 'Lat stretch' },
+                
+                // BACK - Cables/Machines
+                { name: 'Lat Pulldown', category: 'Back', equipment: 'Cable Machine', variations: ['Wide Grip', 'Close Grip', 'Neutral Grip', 'Underhand'], notes: 'Lat width' },
+                { name: 'Seated Cable Row', category: 'Back', equipment: 'Cable Machine', variations: ['Wide Grip', 'Close Grip', 'V-Handle', 'Rope'], notes: 'Mid back thickness' },
+                { name: 'Face Pull', category: 'Back', equipment: 'Cable Machine', variations: ['Rope', 'High to Low'], notes: 'Rear delt and upper back' },
+                { name: 'Straight Arm Pushdown', category: 'Back', equipment: 'Cable Machine', variations: ['Rope', 'Bar', 'V-Handle'], notes: 'Lat isolation' },
+                { name: 'Cable Shrug', category: 'Back', equipment: 'Cable Machine', variations: ['Behind Back', 'Standard'], notes: 'Constant tension traps' },
+                { name: 'Pull-up/Chin-up', category: 'Back', equipment: 'Pull-up Bar', variations: ['Wide Grip', 'Close Grip', 'Neutral', 'Weighted'], notes: 'Best lat builder' },
+                
+                // SHOULDERS - Barbell
+                { name: 'Overhead Press', category: 'Shoulders', equipment: 'Barbell', variations: ['Strict', 'Push Press', 'Behind Neck'], notes: 'Primary shoulder builder' },
+                { name: 'Barbell Front Raise', category: 'Shoulders', equipment: 'Barbell', variations: ['Standard', 'Wide Grip'], notes: 'Front delt isolation' },
+                { name: 'Barbell Upright Row', category: 'Shoulders', equipment: 'Barbell', variations: ['Wide Grip', 'Close Grip'], notes: 'Medial delts and traps' },
+                
+                // SHOULDERS - Dumbbell
+                { name: 'Dumbbell Shoulder Press', category: 'Shoulders', equipment: 'Dumbbells', variations: ['Seated', 'Standing', 'Arnold Press', 'Neutral Grip'], notes: 'Overall shoulder mass' },
+                { name: 'Dumbbell Lateral Raise', category: 'Shoulders', equipment: 'Dumbbells', variations: ['Standing', 'Seated', 'Leaning', 'One Arm'], notes: 'Medial delt width' },
+                { name: 'Dumbbell Front Raise', category: 'Shoulders', equipment: 'Dumbbells', variations: ['Alternating', 'Both Arms', 'Neutral Grip'], notes: 'Front delt focus' },
+                { name: 'Dumbbell Rear Delt Fly', category: 'Shoulders', equipment: 'Dumbbells', variations: ['Bent Over', 'Chest Supported', 'Seated'], notes: 'Rear delt development' },
+                { name: 'Dumbbell Shrugs', category: 'Shoulders', equipment: 'Dumbbells', variations: ['Standard', 'Incline'], notes: 'Trap growth' },
+                
+                // SHOULDERS - Cables/Machines
+                { name: 'Cable Lateral Raise', category: 'Shoulders', equipment: 'Cable Machine', variations: ['One Arm', 'Both Arms', 'Behind Back'], notes: 'Constant tension medial delts' },
+                { name: 'Cable Front Raise', category: 'Shoulders', equipment: 'Cable Machine', variations: ['Rope', 'Handle', 'Bar'], notes: 'Front delt isolation' },
+                { name: 'Cable Rear Delt Fly', category: 'Shoulders', equipment: 'Cable Machine', variations: ['Bent Over', 'Seated'], notes: 'Rear delt focus' },
+                { name: 'Machine Shoulder Press', category: 'Shoulders', equipment: 'Machine', variations: ['Seated', 'Hammer Strength'], notes: 'Stable overhead pressing' },
+                
+                // ARMS - Biceps Barbell
+                { name: 'Barbell Curl', category: 'Arms - Biceps', equipment: 'Barbell', variations: ['Standing', 'Wide Grip', 'Close Grip', '21s'], notes: 'Classic bicep builder' },
+                { name: 'EZ-Bar Curl', category: 'Arms - Biceps', equipment: 'EZ-Bar', variations: ['Standard', 'Wide Grip', 'Close Grip'], notes: 'Easier on wrists' },
+                { name: 'Preacher Curl', category: 'Arms - Biceps', equipment: 'Barbell/EZ-Bar', variations: ['Barbell', 'EZ-Bar', 'One Arm'], notes: 'Bicep peak development' },
+                
+                // ARMS - Biceps Dumbbell
+                { name: 'Dumbbell Curl', category: 'Arms - Biceps', equipment: 'Dumbbells', variations: ['Alternating', 'Hammer', 'Incline', 'Concentration'], notes: 'Bicep mass builder' },
+                { name: 'Hammer Curl', category: 'Arms - Biceps', equipment: 'Dumbbells', variations: ['Alternating', 'Both Arms', 'Rope'], notes: 'Brachialis focus' },
+                { name: 'Incline Dumbbell Curl', category: 'Arms - Biceps', equipment: 'Dumbbells', variations: ['45°', '60°', 'Alternating'], notes: 'Long head emphasis' },
+                
+                // ARMS - Biceps Cable
+                { name: 'Cable Curl', category: 'Arms - Biceps', equipment: 'Cable Machine', variations: ['Bar', 'Rope', 'Single Arm'], notes: 'Constant tension biceps' },
+                { name: 'Cable Hammer Curl', category: 'Arms - Biceps', equipment: 'Cable Machine', variations: ['Rope', 'Handle'], notes: 'Cable brachialis work' },
+                
+                // ARMS - Triceps Barbell
+                { name: 'Close Grip Bench Press', category: 'Arms - Triceps', equipment: 'Barbell', variations: ['Flat', 'Incline', 'Decline'], notes: 'Mass builder for triceps' },
+                { name: 'Skull Crusher', category: 'Arms - Triceps', equipment: 'Barbell/EZ-Bar', variations: ['To Forehead', 'To Nose', 'Overhead'], notes: 'Long head focus' },
+                { name: 'JM Press', category: 'Arms - Triceps', equipment: 'Barbell', variations: ['Standard', 'Close Grip'], notes: 'Hybrid skull crusher/press' },
+                
+                // ARMS - Triceps Dumbbell
+                { name: 'Dumbbell Tricep Extension', category: 'Arms - Triceps', equipment: 'Dumbbells', variations: ['Overhead', 'Lying', 'Two Arm', 'One Arm'], notes: 'Long head emphasis' },
+                { name: 'Dumbbell Kickback', category: 'Arms - Triceps', equipment: 'Dumbbells', variations: ['One Arm', 'Both Arms'], notes: 'Tricep isolation' },
+                
+                // ARMS - Triceps Cables/Machines
+                { name: 'Cable Pushdown', category: 'Arms - Triceps', equipment: 'Cable Machine', variations: ['Rope', 'V-Bar', 'Straight Bar'], notes: 'Lateral head focus' },
+                { name: 'Cable Overhead Extension', category: 'Arms - Triceps', equipment: 'Cable Machine', variations: ['Rope', 'Single Arm'], notes: 'Long head stretch' },
+                { name: 'Dip', category: 'Arms - Triceps', equipment: 'Dip Station', variations: ['Bodyweight', 'Weighted', 'Tricep Focus'], notes: 'Compound tricep builder' },
+                
+                // LEGS - Barbell Squat Variations
+                { name: 'Back Squat', category: 'Legs - Quads', equipment: 'Barbell', variations: ['High Bar', 'Low Bar', 'Pause', 'Tempo'], notes: 'King of leg exercises' },
+                { name: 'Front Squat', category: 'Legs - Quads', equipment: 'Barbell', variations: ['Clean Grip', 'Cross Arm', 'Zombie'], notes: 'Quad dominant' },
+                { name: 'Hack Squat (Barbell)', category: 'Legs - Quads', equipment: 'Barbell', variations: ['Behind Legs'], notes: 'Old school quad builder' },
+                { name: 'Zercher Squat', category: 'Legs - Quads', equipment: 'Barbell', variations: ['Box', 'Standard', 'Anderson'], notes: 'Core and quad emphasis' },
+                
+                // LEGS - Barbell Hinge
+                { name: 'Romanian Deadlift', category: 'Legs - Hamstrings', equipment: 'Barbell', variations: ['Standard', 'Single Leg', 'Deficit'], notes: 'Premier hamstring builder' },
+                { name: 'Stiff Leg Deadlift', category: 'Legs - Hamstrings', equipment: 'Barbell', variations: ['Standard', 'Deficit'], notes: 'Hamstring stretch' },
+                { name: 'Good Morning', category: 'Legs - Hamstrings', equipment: 'Barbell', variations: ['High Bar', 'Low Bar', 'Seated'], notes: 'Posterior chain' },
+                
+                // LEGS - Machines
+                { name: 'Leg Press', category: 'Legs - Quads', equipment: 'Machine', variations: ['Standard', 'High Feet', 'Low Feet', 'Single Leg'], notes: 'Quad mass builder' },
+                { name: 'Hack Squat Machine', category: 'Legs - Quads', equipment: 'Machine', variations: ['Standard', 'High Feet', 'Single Leg'], notes: 'Quad isolation' },
+                { name: 'Leg Extension', category: 'Legs - Quads', equipment: 'Machine', variations: ['Standard', 'Single Leg', 'Drop Sets'], notes: 'Quad isolation' },
+                { name: 'Leg Curl', category: 'Legs - Hamstrings', equipment: 'Machine', variations: ['Lying', 'Seated', 'Standing'], notes: 'Hamstring isolation' },
+                { name: 'Calf Raise', category: 'Legs - Calves', equipment: 'Machine', variations: ['Standing', 'Seated', 'Leg Press'], notes: 'Calf development' },
+                
+                // LEGS - Dumbbell
+                { name: 'Dumbbell Lunge', category: 'Legs - Quads', equipment: 'Dumbbells', variations: ['Walking', 'Reverse', 'Lateral', 'Bulgarian Split'], notes: 'Unilateral leg work' },
+                { name: 'Dumbbell Step-Up', category: 'Legs - Quads', equipment: 'Dumbbells', variations: ['High Box', 'Low Box'], notes: 'Functional leg strength' },
+                { name: 'Goblet Squat', category: 'Legs - Quads', equipment: 'Dumbbell/Kettlebell', variations: ['Standard', 'Pause', 'Tempo'], notes: 'Beginner-friendly squat' },
+                
+                // CORE/ABS
+                { name: 'Ab Wheel Rollout', category: 'Core', equipment: 'Ab Wheel', variations: ['Kneeling', 'Standing'], notes: 'Advanced core strength' },
+                { name: 'Cable Crunch', category: 'Core', equipment: 'Cable Machine', variations: ['Rope', 'Kneeling'], notes: 'Weighted ab work' },
+                { name: 'Hanging Leg Raise', category: 'Core', equipment: 'Pull-up Bar', variations: ['Knee Raise', 'Straight Leg', 'Toes to Bar'], notes: 'Lower ab focus' },
+                { name: 'Plank', category: 'Core', equipment: 'Bodyweight', variations: ['Standard', 'Side', 'Weighted'], notes: 'Core stability' },
+                
+                // OLYMPIC LIFTS
+                { name: 'Power Clean', category: 'Olympic', equipment: 'Barbell', variations: ['Hang', 'From Floor', 'High Pull'], notes: 'Explosive power' },
+                { name: 'Power Snatch', category: 'Olympic', equipment: 'Barbell', variations: ['Hang', 'From Floor'], notes: 'Full body power' },
+                { name: 'Clean and Jerk', category: 'Olympic', equipment: 'Barbell', variations: ['Squat Clean', 'Power Clean', 'Split Jerk'], notes: 'Olympic competition lift' },
+                
+                // KETTLEBELL
+                { name: 'Kettlebell Swing', category: 'Kettlebell', equipment: 'Kettlebell', variations: ['Two Hand', 'One Hand', 'American'], notes: 'Hip hinge power' },
+                { name: 'Turkish Get-Up', category: 'Kettlebell', equipment: 'Kettlebell', variations: ['Standard', 'Bottom-Up'], notes: 'Full body movement' },
+                { name: 'Kettlebell Goblet Squat', category: 'Kettlebell', equipment: 'Kettlebell', variations: ['Standard', 'Pause'], notes: 'Squat pattern' },
+                { name: 'Kettlebell Snatch', category: 'Kettlebell', equipment: 'Kettlebell', variations: ['One Arm', 'Alternating'], notes: 'Explosive pull' },
             ]);
 
-            const categories = ['All', 'Pressing', 'Deadlift', 'Carrying', 'Loading', 'Pulling', 'Grip/Hold', 'Static Strength', 'Throwing', 'Accessory'];
+            const categories = ['All', 'Strongman Pressing', 'Strongman Deadlift', 'Strongman Carrying', 'Strongman Loading', 'Strongman Pulling', 'Powerlifting', 'Chest', 'Back', 'Shoulders', 'Arms - Biceps', 'Arms - Triceps', 'Legs - Quads', 'Legs - Hamstrings', 'Legs - Calves', 'Core', 'Olympic', 'Kettlebell'];
 
             // Load data from localStorage
             useEffect(() => {
